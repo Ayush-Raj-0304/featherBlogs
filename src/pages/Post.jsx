@@ -8,11 +8,12 @@ import parse from "html-react-parser";
 
 function Post() {
   const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true); // Add loading state
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
   const isTheAuthor = post && userData ? post.userId === userData.$id : false;
 
-  const { postId } = useParams(); // Ensure you're extracting the correct id param from the URL
+  const { postId } = useParams();
 
   useEffect(() => {
     if (postId) {
@@ -22,7 +23,7 @@ function Post() {
         } else {
           navigate("/");
         }
-      });
+      }).finally(() => setLoading(false));
     }
   }, [postId, navigate]);
 
@@ -35,35 +36,49 @@ function Post() {
     });
   };
 
+  if (loading) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="p-4 rounded-full bg-white/60 backdrop-blur-xl shadow-lg">
+          <div className="w-12 h-12 border-4 border-indigo-400 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      </div>
+    );
+  }
+
   return post ? (
-    <div className="py-8 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-700 min-h-screen">
+    <div className="px-4 min-h-screen bg-transparent">
       <Container>
-        <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2 bg-gray-800 shadow-lg">
+        {/* Featured Image */}
+        <div className="relative rounded-3xl overflow-hidden shadow-2xl mb-10 backdrop-blur-xl bg-white/20 border border-white/30">
           <img
             src={dbService.getFilePreview(post.featuredImage)}
             alt={post.title}
-            className="rounded-xl"
+            className="w-full h-[420px] object-cover object-center rounded-3xl"
           />
           {isTheAuthor && (
-            <div className="absolute right-6 top-6 flex space-x-2">
+            <div className="absolute top-5 right-5 flex gap-3">
               <Link to={`/edit-post/${post.$id}`}>
-                <Button bgColor="bg-green-500" className="mr-3">
+                <Button className="hover:bg-emerald-500">
                   Edit
                 </Button>
               </Link>
-              <Button bgColor="bg-red-500" onClick={deletePost}>
+              <Button  className="hover:bg-rose-700" onClick={deletePost}>
                 Delete
               </Button>
             </div>
           )}
         </div>
-        <div className="w-full mb-6">
-          <h1 className="text-3xl font-bold text-gray-100">
+
+        {/* Post Content */}
+        <div className="mx-auto max-w-6xl p-10 rounded-[2rem] backdrop-blur-2xl bg-white/50 border border-white/30 shadow-[0_10px_30px_rgba(0,0,0,0.1)]">
+          <h1 className="text-center text-5xl font-bold text-zinc-900 mb-6 leading-tight">
             {post.title}
           </h1>
-        </div>
-        <div className="text-gray-200">
-          {parse(post.content)}
+          <div className="text-center text-sm text-zinc-500 mb-6">Enjoy Reading</div>
+          <article className="prose prose-lg max-w-none text-zinc-800">
+            {parse(post.content)}
+          </article>
         </div>
       </Container>
     </div>

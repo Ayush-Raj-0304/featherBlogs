@@ -1,19 +1,27 @@
 import React from "react";
 import Container from "../components/Container/Container";
 import PostForm from "../components/PostForm/PostForm";
+import AnimatedFadeIn from "../components/AnimatedFadeIn";
 
 function AddPost() {
   return (
-    <div className="py-8 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-700 min-h-screen">
-      <Container>
-        <div className="bg-gray-800 p-8 rounded-lg shadow-lg">
-          <h1 className="text-3xl font-semibold text-gray-100 mb-6">
-            Add a New Post
-          </h1>
-          <PostForm />
-        </div>
-      </Container>
-    </div>
+    <AnimatedFadeIn>
+      <div className="px-4 py-16">
+        <Container>
+          <div className="relative max-w-4xl mx-auto rounded-3xl p-10 backdrop-blur-2xl bg-white/30 border border-white/30 shadow-xl">
+            {/* Decorative mesh gradients */}
+            <div className="absolute -z-10 -top-16 -left-16 w-72 h-72 bg-blue-200/30 rounded-full blur-3xl" />
+            <div className="absolute -z-10 -bottom-16 -right-16 w-72 h-72 bg-purple-200/30 rounded-full blur-3xl" />
+
+            <h1 className="text-4xl font-bold text-zinc-900 mb-8 text-center">
+              Create a New Post
+            </h1>
+
+            <PostForm />
+          </div>
+        </Container>
+      </div>
+    </AnimatedFadeIn>
   );
 }
 

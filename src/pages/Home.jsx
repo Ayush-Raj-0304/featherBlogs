@@ -4,80 +4,96 @@ import PostCard from "../components/PostCard/PostCard";
 import dbService from "../appwrite/database_service";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import AnimatedFadeIn from "../components/AnimatedFadeIn";
 
 function Home() {
-    const [posts, setPosts] = useState([]);
-    const authStatus = useSelector((state) => state.auth.status);
-    const userData = useSelector((state) => state.auth.userData);
-    const userId = userData ? userData.$id : null; // Safely access userId
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true); // Add loading state
+  const authStatus = useSelector((state) => state.auth.status);
+  const userData = useSelector((state) => state.auth.userData);
+  const userId = userData ? userData.$id : null;
 
-    useEffect(() => {
-        if (authStatus && userId) { // Check if userId is valid
-            dbService.getPosts(userId).then((res) => {
-                if (res) {
-                    setPosts(res.documents);
-                }
-            });
-        }
-    }, [authStatus, userId]);
+  useEffect(() => {
+    if (authStatus && userId) {
+      dbService
+        .getPosts(userId)
+        .then((res) => {
+          if (res) setPosts(res.documents);
+        })
+        .finally(() => setLoading(false));
+    } else {
+      setLoading(false);
+    }
+  }, [authStatus, userId]);
 
-    // Landing page for unauthenticated users
-    if (!authStatus) {
-  return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-r from-gray-800 via-gray-900 to-black text-gray-200 px-4">
-      <Container>
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-extrabold mt-4">
-            Welcome to FeatherBlogs!
-          </h1>
-          <p className="mt-2 text-base sm:text-lg md:text-xl max-w-2xl mx-auto">
-            Discover insightful articles and connect with others in the
-            community.
-          </p>
-        </div>
-        <h2 className="text-2xl sm:text-3xl font-semibold mb-4">
-          Join Us Today!
-        </h2>
-        <p className="mb-6 text-center text-gray-300 text-sm sm:text-base md:text-lg px-4 max-w-lg mx-auto">
-          Sign up or log in to explore a variety of topics and contribute your
-          knowledge.
-        </p>
-        <div className="flex flex-col sm:flex-row justify-center items-center">
-          <Link to="/signup">
-            <button className="bg-gray-600 hover:bg-gray-700 text-white py-3 px-6 rounded-md transition duration-200 shadow-lg transform hover:scale-105 w-full sm:w-auto">
-              Sign Up
-            </button>
-          </Link>
-          <Link to="/login" className="p-2">
-            <button className="bg-gray-700 hover:bg-gray-800 text-white py-3 px-6 rounded-md transition duration-200 shadow-lg transform hover:scale-105 w-full sm:w-auto">
-              Log In
-            </button>
-          </Link>
-        </div>
-      </Container>
-    </div>
-  );
-}
-    // Display posts for authenticated users
+  if (!authStatus) {
     return (
-        <div className="w-full py-8 bg-gradient-to-r from-gray-800 via-gray-900 to-black">
-            <Container>
-                <div className="flex flex-wrap justify-center">
-                    {posts.length > 0 ? (
-                        posts.map((post) => (
-                            <div key={post.$id} className="p-2">
-                                <PostCard {...post} />
-                            </div>
-                        ))
-                    ) : (
-                        <div className="w-full text-center text-gray-300">
-                            <h2 className="text-2xl">No Posts Available</h2>
-                        </div>
-                    )}
-                </div>
-            </Container>
+      <AnimatedFadeIn>
+        <div className="flex flex-col justify-center items-center px-4 py-24">
+          <div className="relative w-full max-w-3xl rounded-3xl p-12 text-center backdrop-blur-2xl bg-white/40 border border-white/30 shadow-2xl">
+            <div className="absolute -z-10 -top-12 -left-12 w-64 h-64 bg-indigo-300/30 rounded-full blur-3xl" />
+            <div className="absolute -z-10 -bottom-12 -right-12 w-64 h-64 bg-pink-300/30 rounded-full blur-3xl" />
+            <h1 className="text-5xl font-bold text-zinc-900 mb-6 leading-tight">
+              Write. Share. Inspire.
+            </h1>
+            <p className="text-lg text-zinc-700 mb-8">
+              Join FeatherBlogs today and start your journey of expressive and
+              impactful storytelling.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link to="/signup">
+                <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl text-base font-medium shadow-md transition-all">
+                  Get Started
+                </button>
+              </Link>
+              <Link to="/login">
+                <button className="bg-white/70 hover:bg-white text-indigo-700 px-6 py-3 rounded-xl text-base font-medium border border-indigo-300 shadow-sm transition-all">
+                  Log In
+                </button>
+              </Link>
+            </div>
+          </div>
         </div>
+      </AnimatedFadeIn>
     );
+  }
+
+  if (loading) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="p-4 rounded-full bg-white/60 backdrop-blur-xl shadow-lg">
+          <div className="w-12 h-12 border-4 border-indigo-400 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <AnimatedFadeIn delay={0.2}>
+      <div className="px-4 py-16">
+        <div className="relative max-w-7xl mx-auto rounded-3xl p-10 backdrop-blur-2xl bg-white/40 border border-white/30 shadow-xl">
+          <div className="absolute -z-10 -top-16 -left-16 w-72 h-72 bg-indigo-200/30 rounded-full blur-3xl" />
+          <div className="absolute -z-10 -bottom-16 -right-16 w-72 h-72 bg-purple-200/30 rounded-full blur-3xl" />
+
+          <h2 className="text-4xl font-semibold text-zinc-900 mb-10 text-center">
+            Your Dashboard
+          </h2>
+
+          {posts.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {posts.map((post) => (
+                <PostCard key={post.$id} {...post} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-zinc-500 text-lg">
+              You haven’t posted anything yet. Start creating now!
+            </p>
+          )}
+        </div>
+      </div>
+    </AnimatedFadeIn>
+  );
 }
 
 export default Home;

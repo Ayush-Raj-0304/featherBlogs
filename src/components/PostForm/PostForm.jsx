@@ -7,6 +7,7 @@ import dbService from "../../appwrite/database_service"
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import RTE from "../RealTimeTextEditor/RTE";
+import AnimatedFadeIn from "../AnimatedFadeIn";
 
 function PostForm({post})
 {
@@ -75,6 +76,7 @@ function PostForm({post})
     },[ watch ,slugTransform , setValue]);
 
     return(
+        <AnimatedFadeIn>
         <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
             <div className="w-2/3 px-2">               
                 
@@ -103,7 +105,9 @@ function PostForm({post})
                         })
                     }}
                 />
+                <AnimatedFadeIn delay={1}>
                 <RTE label = "Content" name="content" control= {control} defaultValue={getValues("content")}/>
+                </AnimatedFadeIn>
                 
             </div>
 
@@ -138,7 +142,8 @@ function PostForm({post})
                     {post? "Update" : "Submit"}
                 </Button>
             </div>
-        </form>                
+        </form>         
+        </AnimatedFadeIn>       
     )
 }
 

@@ -1,21 +1,31 @@
 import React from "react";
 import dbService from "../../appwrite/database_service";
 import { Link } from "react-router-dom";
+import AnimatedFadeIn from "../AnimatedFadeIn";
 
 function PostCard({ $id, title, featuredImage }) {
   return (
-    <Link to={`/post/${$id}`}>
-      <div className="w-full bg-gray-800 rounded-xl p-4 transition-transform transform hover:scale-105 shadow-md">
-        <div className="w-full flex flex-col justify-center mb-4">
+    <AnimatedFadeIn >
+    <Link to={`/post/${$id}`} className="block group transition-transform transform hover:scale-[1.02]">
+      <div className="w-full rounded-2xl bg-white/30 backdrop-blur-xl border border-white/30 shadow-xl overflow-hidden transition-all duration-300">
+        {/* Image */}
+        <div className="h-48 overflow-hidden">
           <img
             src={dbService.getFilePreview(featuredImage)}
             alt={title}
-            className="rounded-xl h-48 object-cover mb-2"
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
           />
-          <h2 className="text-lg font-semibold text-gray-200">{title}</h2>
+        </div>
+
+        {/* Title */}
+        <div className="p-4">
+          <h2 className="text-lg font-semibold text-zinc-800 group-hover:text-indigo-600 transition-colors duration-200">
+            {title}
+          </h2>
         </div>
       </div>
     </Link>
+    </AnimatedFadeIn>
   );
 }
 

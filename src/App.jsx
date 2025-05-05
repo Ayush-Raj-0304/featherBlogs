@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
-import './App.css';
-import { useDispatch } from 'react-redux';
-import authService from './appwrite/auth';
-import { login, logout } from './store/authSlice';
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import authService from "./appwrite/auth";
+import { login, logout } from "./store/authSlice";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
-import { Outlet } from 'react-router-dom';
+import LayoutWrapper from "./components/LayoutWrapper";
+import { Outlet } from "react-router-dom";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -20,32 +20,36 @@ function App() {
           dispatch(logout());
         }
       })
-      .finally(() => {
-        setLoading(false);
-      });
+      .finally(() => setLoading(false));
   }, [dispatch]);
 
-  return !loading ? (
-    <div className="min-h-screen flex flex-col justify-between bg-gradient-to-tl from-gray-800 via-gray-900 to-black">
-      {/* Responsive Wrapper */}
-      <div className="w-full">
+  if (loading) {
+    return (
+      <LayoutWrapper>
+        <div className="fixed inset-0 flex items-center justify-center">
+          <div className="p-4 rounded-full bg-white/60 backdrop-blur-xl shadow-lg">
+            <div className="w-12 h-12 border-4 border-indigo-400 border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        </div>
+      </LayoutWrapper>
+    );
+  }
+
+  return (
+    <LayoutWrapper>
+      <div className="flex flex-col min-h-screen w-full">
         <Header />
-        
-        {/* Horizontal Rule with Responsive Spacing */}
-        <hr className="border-gray-600  "  />
 
-        {/* Main Content Area */}
-        <main className="text-gray-200 bg-gradient-to-r from-gray-800 via-gray-900 to-black">
-          <Outlet />
+        <main className="flex-grow w-full px-4 py-10">
+          {/* <div className="max-w-5xl mx-auto p-8 rounded-3xl backdrop-blur-xl bg-white/60 border border-white/40 shadow-[0_8px_32px_0_rgba(99,102,241,0.15)] transition-all hover:shadow-[0_8px_32px_0_rgba(99,102,241,0.25)]"> */}
+            <Outlet />
+          {/* </div> */}
         </main>
-
-        {/* Horizontal Rule with Responsive Spacing */}
-        <hr className="border-gray-600 " />
 
         <Footer />
       </div>
-    </div>
-  ) : null;
+    </LayoutWrapper>
+  );
 }
 
 export default App;

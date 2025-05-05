@@ -7,5 +7,13 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    function ({ addComponents }) {
+      addComponents({
+        ".glass-panel": {
+          "@apply backdrop-blur-xl bg-white/40 border border-white/50 shadow-md rounded-xl": {},
+        },
+      });
+    },
+  ],
 }

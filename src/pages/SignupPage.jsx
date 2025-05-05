@@ -1,11 +1,12 @@
 import React from "react";
 import Signup from "../components/SignUp/Signup";
+import AnimatedFadeIn from "../components/AnimatedFadeIn";
 
 function SignupPage() {
     return (
-        <div className="">
-                <Signup />
-        </div>
+        <AnimatedFadeIn>
+            <Signup />
+        </AnimatedFadeIn>
     );
 }
 
