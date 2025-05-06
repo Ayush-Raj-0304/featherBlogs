@@ -75,7 +75,10 @@ function Post() {
           <h1 className="text-center text-5xl font-bold text-zinc-900 mb-6 leading-tight">
             {post.title}
           </h1>
-          <div className="text-center text-sm text-zinc-500 mb-6">Enjoy Reading</div>
+          <div className="text-center text-sm text-gray-500 mb-6">
+            {`Posted by User ID: ${post.userId} (User identity anonymized for privacy)`}
+          </div>
+
           <article className="prose prose-lg max-w-none text-zinc-800">
             {parse(post.content)}
           </article>

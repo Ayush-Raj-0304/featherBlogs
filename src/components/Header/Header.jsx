@@ -24,7 +24,7 @@ function Header() {
 
   return (
     <AnimatedFadeIn>
-      <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/40 border-b border-white/20 shadow-md">
+      <header className="sticky px-8 top-0 z-50 backdrop-blur-xl bg-white/40 border-b border-white/20 shadow-md">
         <Container>
           <nav className="flex flex-wrap items-center justify-between py-3">
             {/* Logo */}

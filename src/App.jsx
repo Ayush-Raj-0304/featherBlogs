@@ -37,13 +37,11 @@ function App() {
 
   return (
     <LayoutWrapper>
-      <div className="flex flex-col min-h-screen w-full">
+      <div className="flex flex-col min-h-screen w-screen">
         <Header />
 
-        <main className="flex-grow w-full px-4 py-10">
-          {/* <div className="max-w-5xl mx-auto p-8 rounded-3xl backdrop-blur-xl bg-white/60 border border-white/40 shadow-[0_8px_32px_0_rgba(99,102,241,0.15)] transition-all hover:shadow-[0_8px_32px_0_rgba(99,102,241,0.25)]"> */}
+        <main className="flex-grow w-screen px-12 py-10">
             <Outlet />
-          {/* </div> */}
         </main>
 
         <Footer />

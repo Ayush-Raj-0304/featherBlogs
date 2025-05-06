@@ -14,7 +14,7 @@ function AllPosts() {
       }
     }).finally(() => setLoading(false));
   }, []);
-
+  console.log(posts.map((post)=>(post)));
   if (loading) {
     return (
       <div className="fixed inset-0 flex items-center justify-center z-50">

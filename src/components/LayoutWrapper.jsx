@@ -1,7 +1,7 @@
 // Updated LayoutWrapper with advanced glassmorphism and mesh gradients (Light Theme)
 export default function LayoutWrapper({ children }) {
     return (
-      <div className="relative min-h-screen w-screen overflow-hidden font-sans text-zinc-800">
+      <div className="relative min-h-screen w-screen overflow-x-hidden overflow-y-auto font-sans text-zinc-800">
         {/* Main background with light mesh gradient */}
         <div className="fixed inset-0 -z-20 bg-gradient-to-br from-purple-50 via-green-50 to-indigo-50">
           {/* Mesh gradient blobs */}

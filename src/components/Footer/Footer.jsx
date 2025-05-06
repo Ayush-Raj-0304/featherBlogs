@@ -4,7 +4,7 @@ import Logo from '../Logo/Logo';
 
 function Footer() {
   return (
-    <footer className="relative overflow-hidden py-12 backdrop-blur-xl bg-white/30 border-t border-white/20 shadow-xl">
+    <footer className="relative overflow-hidden py-12 px-8 backdrop-blur-xl bg-white/30 border-t border-white/20 shadow-xl">
       {/* Decorative Glows */}
       <div className="absolute -top-24 -left-24 w-72 h-72 bg-indigo-300/20 rounded-full blur-[120px] -z-10" />
       <div className="absolute -bottom-28 -right-28 w-80 h-80 bg-pink-300/20 rounded-full blur-[120px] -z-10" />
