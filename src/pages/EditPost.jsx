@@ -24,7 +24,7 @@ function EditPost() {
 
   return post ? (
     <AnimatedFadeIn>
-      <div className="px-4 py-16">
+      <div className="px-4 ">
         <Container>
           <div className="relative max-w-4xl mx-auto rounded-3xl p-10 backdrop-blur-2xl bg-white/30 border border-white/30 shadow-xl">
             {/* Decorative mesh gradients */}

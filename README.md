@@ -2,7 +2,7 @@
 
 A modern full-stack blog application focused on clean architecture, modular components, and blazing-fast performance — built using **React**, **Redux Toolkit**, **Tailwind CSS**, and powered by **Appwrite** as the backend.
 
-![alt text](./screenshots/image.png)
+![alt text](<./screenshots/Screenshot 2025-05-06 061339.png>)
 
 ---
 
@@ -25,7 +25,7 @@ A modern full-stack blog application focused on clean architecture, modular comp
 
 ---
 
-## ✨ Key Features
+## ✨ Key Learnings
 
 ### 🗂️ Multi-page Blog Structure
 - Built with React Router & Hooks
@@ -34,7 +34,6 @@ A modern full-stack blog application focused on clean architecture, modular comp
 ### 🔐 Authentication
 - Login and Signup using Appwrite's built-in auth service
 - Token-based user session tracking
-![alt text](./screenshots/image-1.png)
 
 ### 🧠 Centralized State Management
 - Managed with Redux Toolkit
@@ -99,6 +98,35 @@ This project helped solidify my Frontend fundamentals, sharpened my debugging sk
 - Optimized for fast, real-time editing and publishing
 
 ---
+
+## 📷 Screenshots
+
+### Landing Page
+![alt text](<./screenshots/Screenshot 2025-05-06 061339.png>)
+
+### Sign Up Form
+![alt text](<./screenshots/Screenshot 2025-05-06 062152.png>)
+
+### Login Form
+![alt text](<./screenshots/Screenshot 2025-05-06 062224.png>)
+
+### User Dashboard
+![alt text](<./screenshots/Screenshot 2025-05-06 062318.png>)
+
+### Explore Section
+![alt text](<./screenshots/Screenshot 2025-05-06 062332.png>)
+
+### Post Form
+![alt text](<./screenshots/Screenshot 2025-05-06 062344.png>)
+
+
+### User's Post
+![alt text](<./screenshots/Screenshot 2025-05-06 062400.png>)
+
+
+### Other's Post
+![alt text](<./screenshots/Screenshot 2025-05-06 062944.png>)
+
 
 ## 📜 License & 🤝 Contribution
 This project is open for contributions. Feel free to contribute and enhance its features!

@@ -47,7 +47,7 @@ function Post() {
   }
 
   return post ? (
-    <div className="px-4 py-12 min-h-screen bg-transparent">
+    <div className="px-4 min-h-screen bg-transparent">
       <Container>
         {/* Featured Image */}
         <div className="relative rounded-3xl overflow-hidden shadow-2xl mb-10 backdrop-blur-xl bg-white/20 border border-white/30">

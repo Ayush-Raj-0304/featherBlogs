@@ -26,7 +26,7 @@ function AllPosts() {
   }
 
   return (
-    <div className="px-4 py-16">
+    <div className="px-4">
       <Container>
         <div className="relative max-w-7xl mx-auto rounded-3xl p-10 backdrop-blur-2xl bg-white/30 border border-white/30 shadow-xl">
           <div className="absolute -z-10 -top-16 -left-16 w-72 h-72 bg-indigo-200/30 rounded-full blur-3xl" />
